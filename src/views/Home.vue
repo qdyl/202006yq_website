@@ -5,7 +5,12 @@
         <!-- 左边 -->
         <a-col class="gutter-row" :span="3">
           <div class="gutter-left-box">
-            <span class="left-logo-box" :class="{'left-logo-box-show':isShowPanel}" title="YQ的个人网站"><img src="../assets/img/logo2.png" alt="" class="logo-img"></span>
+            <span
+              class="left-logo-box"
+              :class="{ 'left-logo-box-show': isShowPanel }"
+              title="YQ的个人网站"
+              ><img src="../assets/img/logo2.png" alt="" class="logo-img"
+            /></span>
             <p class="left-text comText">本是青灯不归客，</p>
             <p class="right-tex comText">却因浊酒恋红尘</p>
           </div>
@@ -32,16 +37,16 @@
                     <span class="contentText">悟6</span>
                     <ul class="box-content-circles">
                       <li
-                        v-for="n in 4"
-                        :key="n"
+                        v-for="item in bannerData"
+                        :key="item.id"
                         class="comCircle-item"
                         :class="{ 'comCircle-item-on': isShowPanel }"
                       >
                         <div class="comItem">
                           <div class="comItem-body">
-                            <h5 class="item-tit">{{ n }}沙漠</h5>
+                            <h5 class="item-tit">{{ item.title }}</h5>
                             <p class="item-text">
-                              这是你梦寐以求的沙漠
+                              {{ item.text }}
                               <br />
                               <span class="item-link">详情</span>
                             </p>
@@ -85,12 +90,12 @@ export default {
     return {
       isShowPanel: false,
       isOpacity: 0,
-      bannerData:[
-        {id:11,title:'沙漠',text:'那是你梦寐以求的沙漠'},
-        {id:12,title:'沙漠',text:'那是你梦寐以求的沙漠'},
-        {id:13,title:'沙漠',text:'那是你梦寐以求的沙漠'},
-        {id:14,title:'沙漠',text:'那是你梦寐以求的沙漠'},
-      ]
+      bannerData: [
+        { id: 11, title: "银河系", text: "抬头仰望星空" },
+        { id: 12, title: "沙漠", text: "那是你梦寐以求的沙漠" },
+        { id: 13, title: "海滩", text: "海边的沙滩" },
+        { id: 14, title: "山川", text: "跋涉山川，山间美景" },
+      ],
     };
   },
   methods: {
@@ -116,20 +121,20 @@ export default {
     height: 100vh;
     background-color: rgba(23, 34, 59, 0.5);
     // filter:brightness(0.6);
-    .left-logo-box{
+    .left-logo-box {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 70px;
       opacity: 0;
-      transition: all .8s;
+      transition: all 0.8s;
       transform: translateY(-100%);
-      &.left-logo-box-show{
+      &.left-logo-box-show {
         opacity: 1;
         transform: translateY(0);
       }
-      .logo-img{
+      .logo-img {
         width: 100%;
         height: 70px;
       }
@@ -243,16 +248,34 @@ export default {
             left: 0;
             width: 100%;
             height: 200%;
-            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.009) 11.7%, rgba(0, 0, 0, 0.034) 22.1%, rgba(0, 0, 0, 0.072) 31.2%, rgba(0, 0, 0, 0.123) 39.4%, rgba(0, 0, 0, 0.182) 46.6%, rgba(0, 0, 0, 0.249) 53.1%, rgba(0, 0, 0, 0.32) 58.9%, rgba(0, 0, 0, 0.394) 64.3%, rgba(0, 0, 0, 0.468) 69.3%, rgba(0, 0, 0, 0.54) 74.1%, rgba(0, 0, 0, 0.607) 78.8%, rgba(0, 0, 0, 0.668) 83.6%, rgba(0, 0, 0, 0.721) 88.7%, rgba(0, 0, 0, 0.762) 94.1%, rgba(0, 0, 0, 0.79) 100%);
+            background-image: linear-gradient(
+              to bottom,
+              rgba(0, 0, 0, 0) 0%,
+              rgba(0, 0, 0, 0.009) 11.7%,
+              rgba(0, 0, 0, 0.034) 22.1%,
+              rgba(0, 0, 0, 0.072) 31.2%,
+              rgba(0, 0, 0, 0.123) 39.4%,
+              rgba(0, 0, 0, 0.182) 46.6%,
+              rgba(0, 0, 0, 0.249) 53.1%,
+              rgba(0, 0, 0, 0.32) 58.9%,
+              rgba(0, 0, 0, 0.394) 64.3%,
+              rgba(0, 0, 0, 0.468) 69.3%,
+              rgba(0, 0, 0, 0.54) 74.1%,
+              rgba(0, 0, 0, 0.607) 78.8%,
+              rgba(0, 0, 0, 0.668) 83.6%,
+              rgba(0, 0, 0, 0.721) 88.7%,
+              rgba(0, 0, 0, 0.762) 94.1%,
+              rgba(0, 0, 0, 0.79) 100%
+            );
           }
           &:hover:after {
             transform: translateY(-50%);
           }
           &:hover {
             .comItem-body {
-               .item-tit {
-                  transform: translateY(60px);
-               }
+              .item-tit {
+                transform: translateY(60px);
+              }
               .item-text {
                 transform: translateY(60px);
               }
@@ -264,15 +287,18 @@ export default {
               // margin-top: 50px;
               color: #fff;
               font-size: 30px;
-                transition: all 0.8s;
-               transform: translateY(220px);
+              transition: all 0.8s;
+              transform: translateY(220px);
             }
             .item-text {
+               
               transition: all 0.8s;
+              font-size: 18px;
               transform: translateY(270px);
             }
             .item-link {
-              // display: block;
+              display: inline-block;
+               margin-top: 20px;
               padding: 2px 8px;
               background-color: rgba(241, 64, 75, 1);
               border-radius: 4px;
